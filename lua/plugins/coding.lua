@@ -1,5 +1,17 @@
 return {
     { "smjonas/inc-rename.nvim", cmd = "IncRename", config = true, lazy = false },
+    {
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp",
+    },
+    {
+        "akinsho/toggleterm.nvim",
+        version = "*",
+        config = true,
+    },
     { "echasnovski/mini.surround", version = false },
     { -- Fuzzy Finder (files, lsp, etc)
         "nvim-telescope/telescope.nvim",
