@@ -13,6 +13,7 @@ return {
                 "scss",
                 "lua",
                 "javascript",
+                "c",
             },
         },
     },
