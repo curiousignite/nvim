@@ -40,6 +40,15 @@ return {
                         require("telescope.themes").get_dropdown(),
                     },
                 },
+                defaults = {
+                    file_ignore_patterns = {
+                        ".jpg",
+                        ".png",
+                        "undodir/*",
+                        ".stfolder/*",
+                        ".stversions/*",
+                    },
+                },
             })
         end,
     },

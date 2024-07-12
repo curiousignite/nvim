@@ -1,11 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
 local harpoon = require("harpoon")
-local M = {}
 -- REQUIRED
 harpoon:setup()
 -- REQUIRED
@@ -38,7 +36,7 @@ end, { desc = "[F]ind with [S]tring" })
 keymap.set("n", "<leader>rn", ":IncRename ")
 
 --UndoTree
-keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle)
 
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 --Smart Move
@@ -56,6 +54,10 @@ keymap.set("n", "<leader>y", '"+y', { desc = "[Y]ank to system clipboard" })
 keymap.set("n", "<leader>Y", '"+Y', { desc = "[Y]ank to system clipboard" })
 -- Delete to void
 keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "[D]elete to void" })
+-- Shift+Insert Multiline paste for windows
+keymap.set("i", "<S-Insert>", "<C-R>+")
+keymap.set("n", "<S-Insert>", "<C-R>")
+
 -- Open parent directory in current window
 keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Open parent directory in floating window

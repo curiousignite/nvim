@@ -11,7 +11,7 @@ vim.opt.expandtab = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = "/undodir"
+vim.opt.undodir = "C:\\Users\\berke\\AppData\\Local\\nvim\\undodir"
 vim.opt.undofile = true
 vim.opt.termguicolors = true
 vim.opt.updatetime = 50

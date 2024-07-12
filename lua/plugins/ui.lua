@@ -42,7 +42,8 @@ return {
             },
         },
     },
-
+    --Neovim QT settings
+    { "equalsraf/neovim-gui-shim" },
     -- logo
     {
         "nvimdev/dashboard-nvim",
