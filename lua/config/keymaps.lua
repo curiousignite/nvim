@@ -6,7 +6,6 @@ local opts = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
 local harpoon = require("harpoon")
 local M = {}
-
 -- REQUIRED
 harpoon:setup()
 -- REQUIRED
@@ -17,7 +16,6 @@ keymap.set("n", "-", "<C-x>")
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
-
 -- New tab
 keymap.set("n", "te", ":tabedit<Return>", opts)
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
@@ -42,18 +40,22 @@ keymap.set("n", "<leader>rn", ":IncRename ")
 --UndoTree
 keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
+keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 --Smart Move
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
-keymap.set("n", "L", "$")
 keymap.set({ "n", "x", "o" }, "H", "^")
 keymap.set({ "n", "x", "o" }, "L", "$")
---Yank
-keymap.set("v", "<leader>y", '"+y')
-keymap.set("n", "<leader>y", '"+y')
-keymap.set("n", "<leader>Y", '"+Y')
+keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+--Yank into system clipboard
+keymap.set("v", "<leader>y", '"+y', { desc = "[Y]ank to system clipboard" })
+keymap.set("n", "<leader>y", '"+y', { desc = "[Y]ank to system clipboard" })
+keymap.set("n", "<leader>Y", '"+Y', { desc = "[Y]ank to system clipboard" })
+-- Delete to void
+keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "[D]elete to void" })
 -- Open parent directory in current window
 keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Open parent directory in floating window
@@ -94,18 +96,6 @@ keymap.set("n", "<leader>/", function()
         previewer = false,
     }))
 end, { desc = "[/] Fuzzily search in current buffer" })
-
-keymap.set("n", "<leader>s/", function()
-    builtin.live_grep({
-        grep_open_files = true,
-        prompt_title = "Live Grep in Open Files",
-    })
-end, { desc = "[S]earch [/] in Open Files" })
-
--- Shortcut for searching your Neovim configuration files
-keymap.set("n", "<leader>sn", function()
-    builtin.find_files({ cwd = vim.fn.stdpath("config") })
-end, { desc = "[S]earch [N]eovim files" })
 
 -- Harpoon configs
 keymap.set("n", "<leader>a", function()
@@ -157,3 +147,6 @@ keymap.set({ "n", "t" }, "<C-t>", function()
     end
 end)
 keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "[G]it [S]tatus" })
+keymap.set("n", "<leader>ga", "<CMD>G add *<CR>", { desc = "[G]it [A]dd" })
+keymap.set("n", "<leader>gc", "<CMD>G commit<CR>", { desc = "[G]it [C]ommit" })
+keymap.set("n", "<leader>gp", "<CMD>G push<CR>", { desc = "[G]it [P]ush" })
