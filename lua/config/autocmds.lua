@@ -3,7 +3,8 @@
 -- Add any additional autocmds here
 --
 -- For conceallevel for json files
-vim.api.nvim_create_autocmd("FileType", {
+local autocmd = vim.api.nvim_create_autocmd
+autocmd("FileType", {
     pattern = { "json", "jsonc" },
     callback = function()
         vim.wo.spell = false

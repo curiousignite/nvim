@@ -1,3 +1,7 @@
+-- REQUIRED
+local harpoon = require("harpoon")
+harpoon:setup()
+-- REQUIRED
 return {
     {
         "folke/noice.nvim",
