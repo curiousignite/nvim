@@ -18,7 +18,7 @@ return {
     { -- Fuzzy Finder (files, lsp, etc)
         "nvim-telescope/telescope.nvim",
         event = "VimEnter",
-        branch = "0.1.x",
+        -- branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             {
@@ -53,4 +53,11 @@ return {
         end,
     },
     { "tpope/vim-fugitive", version = "*" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/cmp-buffer" },
+    { "hrsh7th/cmp-nvim-lua" },
+    { "hrsh7th/cmp-path" },
+    { "saadparwaiz1/cmp_luasnip" },
+    { "hrsh7th/nvim-cmp" },
+    { "hrsh7th/cmp-cmdline" },
 }
