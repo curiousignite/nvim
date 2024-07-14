@@ -23,18 +23,35 @@ return {
             cmp_lsp.default_capabilities()
         )
         local lspconfig = require("lspconfig")
-        local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-        require("fidget").setup({})
-        require("mason").setup()
+        require("fidget").setup({
+            --Theme settings
+            notification = {
+                window = {
+                    winblend = 0,
+                },
+            },
+        })
+        require("mason").setup({})
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "lua_ls",
-                "rust_analyzer",
-                "gopls",
                 "tsserver",
-                "eslint",
                 "html",
                 "cssls",
+                "tailwindcss",
+                "svelte",
+                "lua_ls",
+                "graphql",
+                "emmet_ls",
+                "prismals",
+                "pyright",
+                "gopls",
+                -- "lua_ls",
+                -- "rust_analyzer",
+                -- "gopls",
+                -- "tsserver",
+                -- "eslint",
+                -- "html",
+                -- "cssls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -42,9 +59,11 @@ return {
                         capabilities = capabilities,
                     })
                 end,
+
+                --TypeScript
                 ["tsserver"] = function()
                     lspconfig.tsserver.setup({
-                        capabilities = lsp_capabilities,
+                        capabilities = capabilities,
                         settings = {
                             completions = {
                                 completeFunctionCalls = true,
@@ -52,24 +71,35 @@ return {
                         },
                     })
                 end,
-                -- Go
-                require("lspconfig").gopls.setup({
-                    capabilities = capabilities,
-                }),
 
+                -- Emmet
+                ["emmet_ls"] = function()
+                    lspconfig.emmet_ls.setup({
+                        capabilities = capabilities,
+                    })
+                end,
+
+                -- Go
+                ["gopls"] = function()
+                    lspconfig.gopls.setup({
+                        capabilities = capabilities,
+                    })
+                end,
                 -- Python
-                require("lspconfig").pyright.setup({
-                    settings = {
-                        python = {
-                            analysis = {
-                                autoSearchPaths = true,
-                                diagnosticMode = "workspace",
-                                useLibraryCodeForTypes = true,
+                ["pyright"] = function()
+                    lspconfig.pyright.setup({
+                        capabilities = capabilities,
+                        settings = {
+                            python = {
+                                analysis = {
+                                    autoSearchPaths = true,
+                                    diagnosticMode = "workspace",
+                                    useLibraryCodeForTypes = true,
+                                },
                             },
                         },
-                    },
-                    capabilities = capabilities,
-                }),
+                    })
+                end,
                 ["lua_ls"] = function()
                     lspconfig.lua_ls.setup({
                         capabilities = capabilities,
@@ -83,9 +113,9 @@ return {
                         },
                     })
                 end,
-                lspconfig.html.setup({ capabilities = lsp_capabilities }),
-                lspconfig.cssls.setup({ capabilities = lsp_capabilities }),
-                lspconfig.eslint.setup({ capabilities = lsp_capabilities }),
+                lspconfig.html.setup({ capabilities = capabilities }),
+                lspconfig.cssls.setup({ capabilities = capabilities }),
+                lspconfig.eslint.setup({ capabilities = capabilities }),
             },
         })
 
@@ -104,8 +134,8 @@ return {
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
             sources = cmp.config.sources({
+                { name = "luasnip" },
                 { name = "nvim_lsp" },
-                { name = "luasnip" }, -- For luasnip users.
             }, {
                 { name = "buffer" },
             }),

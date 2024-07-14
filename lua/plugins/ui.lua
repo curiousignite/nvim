@@ -85,11 +85,20 @@ return {
             { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
             { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
         },
+        version = "*",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             options = {
                 mode = "tabs",
                 show_buffer_close_icons = false,
                 show_close_icon = false,
+                after = "catppuccin",
+                config = function()
+                    require("bufferline").setup({
+                        highlights = require("catppuccin.groups.integrations.bufferline").get(),
+                        print(highlights),
+                    })
+                end,
             },
         },
     },
@@ -99,13 +108,15 @@ return {
         event = "VeryLazy",
         opts = {
             options = {
-                theme = "auto",
+                theme = "catppuccin-mocha",
             },
         },
     },
     --Neovim QT settings
     { "equalsraf/neovim-gui-shim" },
     -- logo
+
+    -- ColorMyPencils()
     {
         "nvimdev/dashboard-nvim",
         event = "VimEnter",

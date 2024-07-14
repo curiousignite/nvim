@@ -5,7 +5,13 @@ return {
         version = "*",
         config = true,
     },
-    { "echasnovski/mini.surround", version = false },
+    {
+        "echasnovski/mini.surround",
+        version = false,
+        config = function()
+            require("mini.surround").setup()
+        end,
+    },
     { -- Fuzzy Finder (files, lsp, etc)
         "nvim-telescope/telescope.nvim",
         event = "VimEnter",
