@@ -1,15 +1,6 @@
 return {
     { "smjonas/inc-rename.nvim", cmd = "IncRename", config = true, lazy = false },
     {
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- install jsregexp (optional!).
-        dependencies = { "rafamadriz/friendly-snippets" },
-        build = "make install_jsregexp",
-    },
-    { "rafamadriz/friendly-snippets" },
-    {
         "akinsho/toggleterm.nvim",
         version = "*",
         config = true,
@@ -53,11 +44,4 @@ return {
         end,
     },
     { "tpope/vim-fugitive", version = "*" },
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-nvim-lua" },
-    { "hrsh7th/cmp-path" },
-    { "saadparwaiz1/cmp_luasnip" },
-    { "hrsh7th/nvim-cmp" },
-    { "hrsh7th/cmp-cmdline" },
 }

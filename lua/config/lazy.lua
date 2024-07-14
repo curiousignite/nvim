@@ -8,6 +8,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
     build = "pwsh " .. vim.fn.stdpath("config") .. "/luasnip_jsregexp_build.ps1",
+    change_detection = { notify = false },
     spec = {
         -- add LazyVim and import its plugins
         {
