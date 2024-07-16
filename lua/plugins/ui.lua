@@ -136,22 +136,18 @@ return {
         "nvimdev/dashboard-nvim",
         event = "VimEnter",
         opts = function(_, opts)
-            local logo = [[
-___                      ___                              ___
- MM                      `MM                               MM                                68b
- MM                       MM                               MM                                Y89
- MM____     ____  ___  __ MM   __   ____     ____  ___  __ MM____      ___     __      ____  ___
- MMMMMMb   6MMMMb `MM 6MM MM   d'  6MMMMb   6MMMMb `MM 6MM MMMMMMb   6MMMMb   6MMbMMM 6MMMMb.`MM
- MM'  `Mb 6M'  `Mb MM69 " MM  d'  6M'  `Mb 6M'  `Mb MM69 " MM'  `Mb 8M'  `Mb 6M'`Mb  6M'   Mb MM
- MM    MM MM    MM MM'    MM d'   MM    MM MM    MM MM'    MM    MM     ,oMM MM  MM  MM    `' MM
- MM    MM MMMMMMMM MM     MMdM.   MMMMMMMM MMMMMMMM MM     MM    MM ,6MM9'MM YM.,M9  MM       MM
- MM    MM MM       MM     MMPYM.  MM       MM       MM     MM    MM MM'   MM  YMM9   MM       MM
- MM.  ,M9 YM    d9 MM     MM  YM. YM    d9 YM    d9 MM     MM.  ,M9 MM.  ,MM (M      YM.   d9 MM
-_MYMMMM9   YMMMM9 _MM_   _MM_  YM._YMMMM9   YMMMM9 _MM_   _MYMMMM9  `YMMM9'Yb.YMMMMb. YMMMM9 _MM_
-                                                                             6M    Yb
-                                                                             YM.   d9
-                                                                              YMMMM9
-      ]]
+            local logo =
+            [[
+ ,,                                                          ,,                                   ,, ⠀
+*MM                       `7MM                              *MM                                   db ⠀
+ MM                         MM                               MM                                      ⠀
+ MM,dMMb.   .gP"Ya `7Mb,od8 MM  ,MP'.gP"Ya   .gP"Ya `7Mb,od8 MM,dMMb.   ,6"Yb.  .P"Ybmmm ,p6"bo `7MM ⠀
+ MM    `Mb ,M'   Yb  MM' "' MM ;Y  ,M'   Yb ,M'   Yb  MM' "' MM    `Mb 8)   MM :MI  I8  6M'  OO   MM ⠀
+ MM     M8 8M""""""  MM     MM;Mm  8M"""""" 8M""""""  MM     MM     M8  ,pm9MM  WmmmP"  8M        MM ⠀
+ MM.   ,M9 YM.    ,  MM     MM `Mb.YM.    , YM.    ,  MM     MM.   ,M9 8M   MM 8M       YM.    ,  MM ⠀
+ P^YbmdP'   `Mbmmd'.JMML. .JMML. YA.`Mbmmd'  `Mbmmd'.JMML.   P^YbmdP'  `Moo9^Yo.YMMMMMb  YMbmd' .JMML⠀
+                                                                               6'     dP             ⠀
+                                                                               Ybmmmd'               ⠀]]
             logo = string.rep("\n", 9) .. logo .. "\n\n"
             opts.config.header = vim.split(logo, "\n")
         end,
