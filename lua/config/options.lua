@@ -18,7 +18,7 @@ for option, value in pairs(powershell_options) do
     vim.opt[option] = value
 end
 vim.opt.clipboard = ""
-vim.opt.spelllang = "tr"
+-- vim.opt.spelllang = "tr"
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
@@ -27,6 +27,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.wrap = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -49,4 +50,3 @@ if vim.g.vscode then
     require("_vscode.functions")
     require("_vscode.mappings")
 end
-vim.opt.wrap = true

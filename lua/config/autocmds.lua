@@ -9,8 +9,9 @@ autocmd("FileType", {
     callback = function()
         vim.wo.spell = false
         vim.wo.conceallevel = 0
-    end,
+    end
 })
+
 autocmd("LspAttach", {
     callback = function(e)
         vim.keymap.set("n", "gd", function()

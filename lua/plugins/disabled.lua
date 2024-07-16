@@ -8,4 +8,5 @@ return {
     { "folke/tokyonight", enabled = false },
     { "folke/persistence.nvim", enabled = false },
     { "echasnovski/mini.pairs", enabled = false },
+    { "lewis6991/gitsigns.nvim", enabled = false },
 }
