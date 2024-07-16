@@ -3,6 +3,22 @@ local harpoon = require("harpoon")
 harpoon:setup()
 -- REQUIRED
 return {
+
+    {"echasnovski/mini.surround",
+        lazy = true,
+        event = "VeryLazy",
+        version = "*",
+    },
+    {"echasnovski/mini.ai",
+        lazy = true,
+        event = "VeryLazy",
+        version = "*",
+    },
+    {"echasnovski/mini.icons",
+        lazy = true,
+        event = "VeryLazy",
+        version = "*",
+    },
     {
         "folke/noice.nvim",
         event = "VeryLazy",

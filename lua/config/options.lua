@@ -49,3 +49,4 @@ if vim.g.vscode then
     require("_vscode.functions")
     require("_vscode.mappings")
 end
+vim.opt.wrap = true

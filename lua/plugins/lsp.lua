@@ -45,13 +45,6 @@ return {
                 "prismals",
                 "pyright",
                 "gopls",
-                -- "lua_ls",
-                -- "rust_analyzer",
-                -- "gopls",
-                -- "tsserver",
-                -- "eslint",
-                -- "html",
-                -- "cssls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -129,9 +122,10 @@ return {
             },
             mapping = cmp.mapping.preset.insert({
                 ["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
+                ["<Up>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
-                ["CMD"] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
+                ["<Down>"] = cmp.mapping.select_next_item(cmp_select),
+                ["<CR>"] = cmp.mapping.confirm({ select = true }),
             }),
             sources = cmp.config.sources({
                 { name = "luasnip" },

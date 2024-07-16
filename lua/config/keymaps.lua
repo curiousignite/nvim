@@ -4,7 +4,6 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
 local harpoon = require("harpoon")
-
 --Increment/decrement
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
