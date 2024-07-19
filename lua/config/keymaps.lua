@@ -32,11 +32,12 @@ keymap.set("n", "<leader>fs", function()
 end, { desc = "[F]ind with [S]tring" })
 
 --IncRename
-keymap.set("n", "<leader>rn", ":IncRename ")
+keymap.set("n", "<leader>rn", ":IncRename ", { desc = "Incremental Rename" })
 
 --UndoTree
 keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle, { desc = "Undotree Toggle" })
 
+--Give the current file execute perms
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 --Smart Move
@@ -52,8 +53,16 @@ keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 keymap.set("v", "<leader>y", '"+y', { desc = "[y]ank to system clipboard" })
 keymap.set("n", "<leader>y", '"+y', { desc = "[y]ank to system clipboard" })
 keymap.set("n", "<leader>Y", '"+Y', { desc = "[Y]ank to system clipboard" })
+
 -- Delete to void
 keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "[D]elete to void" })
+
+-- Paste to void
+keymap.set({ "n", "v" }, "<leader>p", '"_p', { desc = "[P]aste to void" })
+
+-- Change to void
+keymap.set({ "n", "v" }, "<leader>c", '"_c', { desc = "[C]hange to void" })
+
 -- Shift+Insert Multiline paste for windows
 keymap.set("i", "<S-Insert>", "<C-R>+")
 keymap.set("n", "<S-Insert>", "<C-R>")
@@ -62,16 +71,16 @@ keymap.set("n", "<S-Insert>", "<C-R>")
 keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Open parent directory in floating window
 keymap.set("n", "<leader>-", require("oil").toggle_float, { desc = "Open parent directory floating" })
--- Diagnostic keymaps
 
-keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "go to previous [d]iagnostic message" })
-keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "go to next [d]iagnostic message" })
-keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "show diagnostic [e]rror messages" })
-keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
+-- Diagnostic keymaps // Using trouble so this is mostly redundant
+-- keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "go to previous [d]iagnostic message" })
+-- keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "go to next [d]iagnostic message" })
+-- keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "show diagnostic [e]rror messages" })
+-- keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+--
 --Quick Save
 keymap.set("n", "<ESC>", "<CMD>w<CR>")
--- TIP: Disable arrow keys in normal mode
+-- Disable arrow keys in normal mode
 keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
 keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
@@ -107,9 +116,28 @@ end, { desc = "[/] Fuzzily search in current buffer" })
 keymap.set("n", "<leader>a", function()
     harpoon:list():add()
 end, { desc = "[A]dd to Harpoon list" })
--- keymap.set("n", "<C-e>", function()
---     harpoon.ui:toggle_quick_menu(harpoon:list())
--- end, { desc = "Toggle Harpoon list" })
+keymap.set("n", "<leader><C-e>", function()
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = "Toggle Harpoon list" })
+
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
+vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+    { desc = "Open harpoon window" })
 
 vim.keymap.set("n", "<C-n>", function()
     harpoon:list():select(1)

@@ -1,20 +1,25 @@
 return {
-    "williamboman/mason.nvim",
+    "neovim/nvim-lspconfig",
+    lazy = false,
+    priority = 100,
     dependencies = {
-        "neovim/nvim-lspconfig",
+        "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+        "onsnails/lspkind.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
     },
 
-    config = function()
+    -- config = function()
+    --     require("custom.completion")
+    -- end,
+    function()
         local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -46,6 +51,7 @@ return {
                 "prismals",
                 "pyright",
                 "gopls",
+                "zls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -53,10 +59,12 @@ return {
                         capabilities = capabilities,
                     })
                 end,
+
                 -- zig
                 ["zls"] = function()
                     lspconfig.zls.setup({
                         root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
+                        settings = capabilities,
                         settings = {
                             zls = {
                                 enable_inlay_hints = true,
@@ -66,6 +74,7 @@ return {
                         },
                     })
                 end,
+
                 --TypeScript
                 ["tsserver"] = function()
                     lspconfig.tsserver.setup({
@@ -127,26 +136,26 @@ return {
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-        cmp.setup({
+        cmp.setup {
             snippet = {
                 expand = function(args)
                     require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
                 end,
             },
-            mapping = cmp.mapping.preset.insert({
+            mapping = {
                 ["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<Up>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
                 ["<Down>"] = cmp.mapping.select_next_item(cmp_select),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
-            }),
-            sources = cmp.config.sources({
-                { name = "luasnip" },
+            },
+            sources = cmp.config.sources {
                 { name = "nvim_lsp" },
-            }, {
+                { name = "luasnip" },
+                { name = "path" },
                 { name = "buffer" },
-            }),
-        })
+            },
+        }
 
         vim.diagnostic.config({
             -- update_in_insert = true,
@@ -158,6 +167,5 @@ return {
                 header = "",
                 prefix = "",
             },
-        })
-    end,
+        })     end,
 }
