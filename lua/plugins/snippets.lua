@@ -1,3 +1,4 @@
+local snip_loader = require('luasnip/loaders/from_vscode')
 return {
     {
         "L3MON4D3/LuaSnip",
@@ -28,4 +29,7 @@ return {
             end, { silent = true })
         end,
     },
+    snip_loader.lazy_load({ paths = vim.fn.stdpath("config") .. "/snippets/" })
+    -- Im 100% sure this is bad, and it can be achieved in a better way
+    -- but i couldn't find the proper way.
 }
