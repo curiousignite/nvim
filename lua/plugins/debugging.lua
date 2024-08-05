@@ -6,6 +6,7 @@ return {
             "rcarriga/nvim-dap-ui",
             "nvim-neotest/nvim-nio",
             "williamboman/mason.nvim",
+            "mfussenegger/nvim-dap-python",
         },
         config = function()
             local dap = require("dap")
@@ -48,6 +49,6 @@ return {
             dap.listeners.before.event_exited.dapui_config = function()
                 ui.close()
             end
-       end
+        end
 
     } }
